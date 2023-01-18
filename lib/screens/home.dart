@@ -2,8 +2,6 @@ import 'package:app_tv_ads/screens/settings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'slideshow.dart';
-
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -22,17 +20,18 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Focus(
         autofocus: true,
         focusNode: _focusNode,
-        child: Visibility(
-          replacement: const SettingScreen(),
-          visible: isScreenController,
-          child: const ScreenController(),
+        child: Container(
+          alignment: Alignment.center,
+          child: const Text("Home Screen")
         ),
         onKey: (node, event) {
-          if (event.isKeyPressed(LogicalKeyboardKey.goBack)) {
-            // print("Go Back");
-            setState(() {
-              isScreenController = false;
-            });
+          if (event.isKeyPressed(LogicalKeyboardKey.select)) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (BuildContext context) => const SettingScreen()
+              )
+            );
           }
           return KeyEventResult.handled;
         },
