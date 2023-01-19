@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:get_it/get_it.dart';
 
 import '../db/config.dart';
+import '../utils/intents.dart';
 import 'features/autorun.dart';
 import 'features/cloud.dart';
 import 'features/security.dart';
@@ -137,21 +138,6 @@ class _SettingScreenState extends State<SettingScreen> {
             ]
           )
         ),
-        floatingActionButton: Container(
-          width: 150,
-          height: 40,
-          alignment: Alignment.center,
-          decoration: const BoxDecoration(
-            color: Color.fromARGB(255, 54, 244, 152),
-            borderRadius: BorderRadius.all(Radius.circular(50))
-          ),
-          child: const Text("Apply Change",
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold
-            ),
-          )
-        ),
       )
     );
   }
@@ -227,11 +213,6 @@ class _SettingScreenState extends State<SettingScreen> {
 
 }
 
-class LeftButtonIntent extends Intent {}
-class RightButtonIntent extends Intent {}
-class UpButtonIntent extends Intent {}
-class DownButtonIntent extends Intent {}
-class SelectButtonIntent extends Intent {}
 
 //this is testing purpose
 // updated by shikhar...
