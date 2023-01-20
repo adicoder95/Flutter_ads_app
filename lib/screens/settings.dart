@@ -1,17 +1,12 @@
 import 'package:app_tv_ads/screens/features/audio.dart';
+import 'package:app_tv_ads/screens/features/cloud.dart';
 import 'package:app_tv_ads/screens/features/scroll.dart';
+import 'package:app_tv_ads/screens/features/security.dart';
+import 'package:app_tv_ads/screens/features/subscription.dart';
+import 'package:app_tv_ads/screens/features/template.dart';
+import 'package:app_tv_ads/screens/features/ticker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:get_it/get_it.dart';
-
-import '../db/config.dart';
-import '../utils/intents.dart';
-import 'features/autorun.dart';
-import 'features/cloud.dart';
-import 'features/security.dart';
-import 'features/subscription.dart';
-import 'features/template.dart';
-import 'features/ticker.dart';
 
 class SettingScreen extends StatefulWidget {
   const SettingScreen({super.key});
@@ -23,7 +18,6 @@ class SettingScreen extends StatefulWidget {
 class _SettingScreenState extends State<SettingScreen> {
 
   int sectionSelectedIndex = 0;
-  late DataBase db;
   
   FocusNode? _templateFocusNode;
   FocusNode? _tickerFocusNode;
@@ -45,13 +39,6 @@ class _SettingScreenState extends State<SettingScreen> {
     _subscriptionFocusNode = FocusNode();
 
     FocusScope.of(context).requestFocus(_templateFocusNode);
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    // accessing database object
-    db = GetIt.I.get<DataBase>();
   }
 
   @override
@@ -98,7 +85,7 @@ class _SettingScreenState extends State<SettingScreen> {
                   LogicalKeySet(LogicalKeyboardKey.select): SelectButtonIntent()
                 },
                 child: Container(
-                  width: MediaQuery.of(context).size.width/4,
+                  width: MediaQuery.of(context).size.width*0.3,
                   height: MediaQuery.of(context).size.height,
                   color: const Color.fromARGB(255, 54, 244, 152),
                   child: Padding(
@@ -120,22 +107,37 @@ class _SettingScreenState extends State<SettingScreen> {
               ),
               
               Flexible(
-                flex: 6,
                 child: Container(
+                    width: MediaQuery.of(context).size.width*0.7,
                   color: const Color.fromARGB(255, 153, 244, 196),
                   child: [
-                    const Template(),
-                    const Ticker(),
-                    const Audio(),
-                    const Scroll(),
-                    const AutoRun(),
-                    const Security(),
-                    const Cloud(),
-                    const Subscription(),
+                    Template(),
+                    Ticker(),
+                    Audio(),
+                    Scroll(),
+                    autorunSection(),
+                    securitySection(),
+                    Cloud(),
+                    Subscription()
                   ][sectionSelectedIndex]
                 )
               ),
             ]
+          )
+        ),
+        floatingActionButton: Container(
+          width: 200,
+          height: 50,
+          alignment: Alignment.center,
+          decoration: const BoxDecoration(
+            color: Color.fromARGB(255, 54, 244, 152),
+            borderRadius: BorderRadius.all(Radius.circular(50))
+          ),
+          child: const Text("Apply Change",
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold
+            ),
           )
         ),
       )
@@ -211,8 +213,68 @@ class _SettingScreenState extends State<SettingScreen> {
     );
   }
 
+  Widget templateSection() {
+    return Container(
+      alignment: Alignment.center,
+      child: const Text("Screen Template")
+    );
+  }
+
+  Widget tickerSection() {
+    return Container(
+      alignment: Alignment.center,
+      child: const  Text("Ticker Template")
+    );
+  }
+
+  Widget audioSection() {
+    return Container(
+      alignment: Alignment.center,
+      child: const Text("Audio Template")
+    );
+  }
+
+  Widget scrollSection() {
+    return Container(
+      alignment: Alignment.center,
+      child: const Text("Scroll Template")
+    );
+  }
+
+  Widget autorunSection() {
+    return Container(
+      alignment: Alignment.center,
+      child: const Text("Auto Run Template")
+    );
+  }
+
+  Widget securitySection() {
+    return Container(
+      alignment: Alignment.center,
+      child: const Text("Security Template")
+    );
+  }
+
+  Widget cloudSection() {
+    return Container(
+      alignment: Alignment.center,
+      child: const Text("Cloud Template")
+    );
+  }
+
+  Widget subscriptionSection() {
+    return Container(
+      alignment: Alignment.center,
+      child: const Text("Subscription Template")
+    );
+  }
 }
 
+class LeftButtonIntent extends Intent {}
+class RightButtonIntent extends Intent {}
+class UpButtonIntent extends Intent {}
+class DownButtonIntent extends Intent {}
+class SelectButtonIntent extends Intent {}
 
 //this is testing purpose
 // updated by shikhar...
