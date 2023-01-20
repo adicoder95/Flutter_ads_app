@@ -1,8 +1,5 @@
 import 'dart:async';
-
-import 'package:android_autostart/android_autostart.dart';
 import 'package:flutter/material.dart';
-
 import '../../db/config.dart';
 import '../intents.dart';
 
@@ -37,9 +34,6 @@ class _ApplyButtonState extends State<ApplyButton> {
             onInvoke: (intent) async {
               print("Apply Select Button Working");
               widget.changeLog.forEach((key, value) async {
-                if (value == "enabled") {
-                  await AndroidAutostart.navigateAutoStartSetting;
-                }
                 db.set("settings", key, value);
               });
               widget.changeLog.clear();

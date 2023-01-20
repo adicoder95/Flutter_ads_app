@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'package:android_autostart/android_autostart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get_it/get_it.dart';
@@ -191,7 +190,7 @@ class _AutoRunState extends State<AutoRun> {
                       print("Apply Select Button Working");
                       changeLog.forEach((key, value) async {
                         if (value == "enabled") {
-                          await AndroidAutostart.navigateAutoStartSetting;
+                          // needs to implement Auto Start Feature
                         }
                         db.set("settings", key, value);
                       });

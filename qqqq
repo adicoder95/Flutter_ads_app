@@ -1,0 +1,60 @@
+[33mcommit 682d1305308d6bca464a12c82ec5f63d3d895262[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m)[m
+Merge: f5d5003 58da1bd
+Author: ShikharY10 <yshikharfzd10@gmail.com>
+Date:   Sat Jan 21 01:19:26 2023 +0530
+
+    Merge branch 'main' of github.com:ShikharY10/flutter_ads_app into main
+
+[33mcommit f5d5003bb6c037f50103e16be4f45bf6bf6e10e9[m
+Author: ShikharY10 <yshikharfzd10@gmail.com>
+Date:   Sat Jan 21 01:06:05 2023 +0530
+
+    screen password feature under development
+
+[33mcommit 58da1bd8bd1c81074b2d67616c92b9ba4a142263[m[33m ([m[1;31morigin/main[m[33m)[m
+Author: Rehaman <srehaman234@gmail.com>
+Date:   Sat Jan 21 00:56:32 2023 +0530
+
+    splitmode update
+
+[33mcommit 2f5e978d36da5c924bc76d368dcec79d45c21cb7[m
+Author: ShikharY10 <yshikharfzd10@gmail.com>
+Date:   Thu Jan 19 15:54:50 2023 +0530
+
+    seperated intent class to sperate file
+
+[33mcommit 68c72b934648665929c64d6f75dea1f7d0b1e777[m
+Author: ShikharY10 <yshikharfzd10@gmail.com>
+Date:   Thu Jan 19 15:23:32 2023 +0530
+
+    added more features
+
+[33mcommit 443c7d833136025df0e7b3ea061f02b052467d69[m
+Author: ShikharY10 <yshikharfzd10@gmail.com>
+Date:   Thu Jan 19 00:05:47 2023 +0530
+
+    testing 2
+
+[33mcommit 450bbd42ab3b50741e0ee64f9ea50f2bc5d32209[m
+Author: Rehaman <srehaman234@gmail.com>
+Date:   Wed Jan 18 23:59:57 2023 +0530
+
+    testing
+
+[33mcommit 72e171602c3e6a577b1bbbf12aa05c18bd45aadb[m
+Author: ShikharY10 <yshikharfzd10@gmail.com>
+Date:   Wed Jan 18 21:40:11 2023 +0530
+
+    setting page navigation functionality
+
+[33mcommit 405a8658ae41220b0e1d7a25ee57fbd188b110d1[m
+Author: ShikharY10 <yshikharfzd10@gmail.com>
+Date:   Wed Jan 18 13:10:29 2023 +0530
+
+    added relevent details
+
+[33mcommit 7f59d6d3694fb0b67f5e4b3e221f7cbaf6965317[m
+Author: ShikharY10 <yshikharfzd10@gmail.com>
+Date:   Wed Jan 18 13:07:41 2023 +0530
+
+    first commit

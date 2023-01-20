@@ -9,6 +9,10 @@ import 'package:app_tv_ads/screens/features/template.dart';
 import 'package:app_tv_ads/screens/features/ticker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get_it/get_it.dart';
+
+import '../db/config.dart';
+import 'features/autorun.dart';
 
 class SettingScreen extends StatefulWidget {
   const SettingScreen({super.key});
@@ -20,7 +24,6 @@ class SettingScreen extends StatefulWidget {
 class _SettingScreenState extends State<SettingScreen> {
 
   StreamController<int> focusStream = StreamController<int>();
-
   int sectionSelectedIndex = 0;
   
   FocusNode? _templateFocusNode;
@@ -32,7 +35,13 @@ class _SettingScreenState extends State<SettingScreen> {
   FocusNode? _cloudFocusNode;
   FocusNode? _subscriptionFocusNode;
 
-  
+  late DataBase db;
+
+  _changeFocus(BuildContext context, FocusNode focusNode) {
+    setState(() {
+      FocusScope.of(context).requestFocus(focusNode);
+    });
+  }
 
   void listenToFocusStream() {
     focusStream.stream.listen((event) {
@@ -69,6 +78,13 @@ class _SettingScreenState extends State<SettingScreen> {
     _subscriptionFocusNode = FocusNode();
 
     FocusScope.of(context).requestFocus(_templateFocusNode);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    // accessing database object
+    db = GetIt.I.get<DataBase>();
   }
 
   @override
@@ -141,14 +157,14 @@ class _SettingScreenState extends State<SettingScreen> {
                     width: MediaQuery.of(context).size.width*0.7,
                   color: const Color.fromARGB(255, 153, 244, 196),
                   child: [
-                    Template(),
-                    Ticker(),
-                    Audio(),
-                    Scroll(),
-                    autorunSection(),
-                    securitySection(),
-                    Cloud(),
-                    Subscription()
+                    const Template(),
+                    const Ticker(),
+                    const Audio(),
+                    const Scroll(),
+                    AutoRun(focusStream: focusStream),
+                    Security(focusStream: focusStream),
+                    const Cloud(),
+                    const Subscription(),
                   ][sectionSelectedIndex]
                 )
               ),
