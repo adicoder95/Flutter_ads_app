@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:app_tv_ads/screens/features/audio.dart';
 import 'package:app_tv_ads/screens/features/scroll.dart';
 import 'package:flutter/material.dart';
@@ -22,6 +24,8 @@ class SettingScreen extends StatefulWidget {
 
 class _SettingScreenState extends State<SettingScreen> {
 
+  StreamController<int> focusStream = StreamController<int>();
+
   int sectionSelectedIndex = 0;
   late DataBase db;
   
@@ -33,6 +37,32 @@ class _SettingScreenState extends State<SettingScreen> {
   FocusNode? _securityFocusNode;
   FocusNode? _cloudFocusNode;
   FocusNode? _subscriptionFocusNode;
+
+  
+
+  void listenToFocusStream() {
+    focusStream.stream.listen((event) {
+      print("Event: $event");
+      if (event == 0) {
+        _changeFocus(context, _templateFocusNode!);
+      } else if (event == 1) {
+        _changeFocus(context, _tickerFocusNode!);
+      } else if (event == 2) {
+        _changeFocus(context, _audioFocusNode!);
+      } else if (event == 3) {
+        _changeFocus(context, _scrollFocusNode!);
+      } else if (event == 4) {
+        _changeFocus(context, _autorunFocusNode!);
+      } else if (event == 5) {
+        _changeFocus(context, _securityFocusNode!);
+      } else if (event == 6) {
+        _changeFocus(context, _cloudFocusNode!);
+      } else if (event == 7) {
+        _changeFocus(context, _subscriptionFocusNode!);
+      }
+      setState(() {});
+    });
+  }
 
   void initializedFocusNodes(BuildContext context) {
     _templateFocusNode = FocusNode();
@@ -47,11 +77,17 @@ class _SettingScreenState extends State<SettingScreen> {
     FocusScope.of(context).requestFocus(_templateFocusNode);
   }
 
+  _changeFocus(BuildContext context, FocusNode focus) {
+    FocusScope.of(context).requestFocus(focus);
+    setState(() {});
+  }
+
   @override
   void initState() {
     super.initState();
     // accessing database object
     db = GetIt.I.get<DataBase>();
+    listenToFocusStream();
   }
 
   @override
@@ -128,8 +164,8 @@ class _SettingScreenState extends State<SettingScreen> {
                     const Ticker(),
                     const Audio(),
                     const Scroll(),
-                    const AutoRun(),
-                    const Security(),
+                    AutoRun(focusStream: focusStream),
+                    Security(focusStream: focusStream),
                     const Cloud(),
                     const Subscription(),
                   ][sectionSelectedIndex]
@@ -142,16 +178,15 @@ class _SettingScreenState extends State<SettingScreen> {
     );
   }
 
-  _changeFocus(BuildContext context, FocusNode focus) {
-    FocusScope.of(context).requestFocus(focus);
-    setState(() {});
-  }
-
   Widget tile(int index, String title, IconData iconData, FocusNode focusNode, {FocusNode? nextFocusNode, FocusNode? previousFocusNode}) {
     Map<Type, Action<Intent>> actions = {
       SelectButtonIntent: CallbackAction<SelectButtonIntent>(
         onInvoke: (intent) {
           setState(() {
+            focusNode.unfocus();
+          });
+          setState(() {
+
             sectionSelectedIndex = index;
           });
           return null; 
